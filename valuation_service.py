@@ -95,6 +95,7 @@ def save_results(result):
 
     try:
         with open("top_products.csv", 'w') as f:
+            f.write('matching_id,total_price,avg_price,currency,ignored_products_count\n')
             for line in result:
                 f.write(line)
     except IOError as e:
@@ -104,4 +105,4 @@ def save_results(result):
 currencies, data, matchings = parse_files('currencies.csv',
                                           'data.csv', 'matchings.csv')
 converted_data = convert_to_pln(currencies, data)
-save_results(aggregate_products(matchings, data))
+save_results(aggregate_products(matchings, converted_data))
